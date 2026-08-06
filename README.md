@@ -1,159 +1,160 @@
-# Turborepo starter
+# Business OS
 
-This Turborepo starter is maintained by the Turborepo core team.
+Business OS is a multi-tenant, AI-powered operating system for African SMEs. It is designed to be the daily operating layer for running a business, not another rigid ERP.
 
-## Using this example
+> Business OS is the product. AI is a subsystem that helps users work with business data safely and naturally.
 
-Run the following command:
+## Overview
 
-```sh
-npx create-turbo@latest
+Business OS gives small and medium businesses a unified platform to manage:
+
+- customers
+- suppliers
+- products and categories
+- inventory
+- sales
+- invoices
+- payments
+- expenses
+- reports
+
+The platform is built around a simple promise:
+
+- every business action should happen once
+- every business question should be answerable instantly
+- the database is the source of truth
+
+## Vision
+
+Business OS exists to make everyday business operations more intelligent, more transparent, and more efficient. The platform should help business owners and teams answer questions instantly, execute workflows safely, and gain better visibility without relying on fragmented tools.
+
+## Product Philosophy
+
+Business OS is founded on the following principles:
+
+- modular architecture
+- domain-driven design
+- multi-tenancy by default
+- RBAC and permission-based authorization
+- audit logging and observability
+- event-driven business actions
+- secure-by-default design
+- documentation-first development
+
+## Key User Stories
+
+- A business owner asks, “Who owes me money?” and receives a grounded answer from live business data.
+- A store manager asks, “Which products are almost finished?” and gets a real-time inventory summary.
+- An accountant records “today’s fuel expense” and the system captures it through a validated workflow.
+- A customer browses a business storefront, places an order, and tracks the transaction end to end.
+
+## Solution Architecture Summary
+
+```mermaid
+flowchart LR
+    U[User / Staff / Customer] --> W[Next.js Web App]
+    W --> A[API Layer]
+    A --> S[Business Services]
+    S --> DB[(PostgreSQL)]
+    S --> Cache[(Redis)]
+    S --> Q[(BullMQ)]
+    A --> AI[AI Assistant]
+    AI --> T[Tool Selection & Validation]
+    T --> S
 ```
 
-## What's inside?
+## Core Platform Capabilities
 
-This Turborepo includes the following packages/apps:
+### Business Operations
 
-### Apps and Packages
+- customer management
+- supplier management
+- product and category management
+- inventory tracking
+- sales workflows
+- invoices and payments
+- expense tracking
+- reporting and dashboarding
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### AI Assistant
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- natural language interaction
+- tool/function calling
+- permission-aware actions
+- business data grounding
+- audit-backed responses
 
-### Utilities
+### Customer Portal
 
-This Turborepo has some additional tools already setup for you:
+- business browsing
+- product viewing
+- order placement
+- order tracking
+- invoice viewing
+- payment actions
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+## Technology Stack
 
-### Build
+| Layer | Technology |
+| --- | --- |
+| Frontend | Next.js, React, TypeScript, Tailwind CSS, shadcn/ui |
+| Data and Forms | TanStack Query, TanStack Table, React Hook Form, Zod |
+| Backend | Next.js, Drizzle ORM, PostgreSQL, Redis, BullMQ |
+| Authentication | Better Auth |
+| Storage | Cloudflare R2 |
+| Deployment | Docker, Neon, Vercel |
+| AI | Google Gemini |
 
-To build all apps and packages, run the following command:
+## Monorepo Structure
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo build
+```text
+apps/
+  web/
+  docs/
+packages/
+  auth/
+  ai/
+  database/
+  permissions/
+  shared/
+  ui/
+  validation/
+  utils/
+docs/
 ```
 
-Without global `turbo`, use your package manager:
+## Documentation Set
 
-```sh
-cd my-turborepo
-npx turbo build
-pnpm dlx turbo build
-pnpm exec turbo build
-```
+This repository is intended to be documented before implementation begins. The documentation set includes:
 
-You can build a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
+- [docs/PROJECT_VISION.md](docs/PROJECT_VISION.md)
+- [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)
+- [docs/ROADMAP.md](docs/ROADMAP.md)
+- [docs/DATABASE_SCHEMA.md](docs/DATABASE_SCHEMA.md)
+- [docs/PERMISSION_MATRIX.md](docs/PERMISSION_MATRIX.md)
+- [docs/API_SPECIFICATION.md](docs/API_SPECIFICATION.md)
+- [docs/CODING_STANDARDS.md](docs/CODING_STANDARDS.md)
+- [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
+- [docs/DECISIONS.md](docs/DECISIONS.md)
+- [docs/MVP_CHECKLIST.md](docs/MVP_CHECKLIST.md)
+- [docs/GLOSSARY.md](docs/GLOSSARY.md)
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
+## Implementation Status
 
-```sh
-turbo build --filter=docs
-```
+This repository currently contains documentation only. No application code, UI components, API endpoints, or database migrations are included.
 
-Without global `turbo`:
+## Principles for Implementation
 
-```sh
-npx turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+- build the core business domain first
+- enforce tenant isolation at every layer
+- use permission-based authorization rather than role-name checks
+- keep AI actions routed through validated business services
+- preserve auditability for business-critical events
 
-### Develop
+## Contributing
 
-To develop all apps and packages, run the following command:
+Contributions should focus on improving the architecture, documentation quality, or implementation readiness. Please review [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md) before proposing changes.
 
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
+## License
 
-```sh
-cd my-turborepo
-turbo dev
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo dev
-pnpm exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters):
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo dev --filter=web
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
-```
-
-### Remote Caching
-
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
-
-Turborepo can use a technique known as [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed (recommended):
-
-```sh
-cd my-turborepo
-turbo login
-```
-
-Without global `turbo`, use your package manager:
-
-```sh
-cd my-turborepo
-npx turbo login
-pnpm exec turbo login
-pnpm exec turbo login
-```
-
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-With [global `turbo`](https://turborepo.dev/docs/getting-started/installation#global-installation) installed:
-
-```sh
-turbo link
-```
-
-Without global `turbo`:
-
-```sh
-npx turbo link
-pnpm exec turbo link
-pnpm exec turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turborepo.dev/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.dev/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.dev/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.dev/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.dev/docs/reference/configuration)
-- [CLI Usage](https://turborepo.dev/docs/reference/command-line-reference)
+This documentation and architecture proposal is intended for open-source collaboration. A final license should be selected before public release.
