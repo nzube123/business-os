@@ -22,3 +22,4 @@ This document records the initial architectural decisions for Business OS. These
 ## Decision Notes
 
 These decisions should be revisited if product requirements, scaling constraints, or infrastructure considerations change materially.
+                                    
