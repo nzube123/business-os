@@ -44,10 +44,10 @@ Establish the core operating foundation for a single business tenant.
 - inventory changes are auditable
 - reporting surfaces are accurate and scoped correctly
 
----
+----
 
 ## Phase 2 — AI Assistant
-
+ 
 ### Objectives
 
 Introduce a safe, grounded AI assistant that helps users act on business data.
