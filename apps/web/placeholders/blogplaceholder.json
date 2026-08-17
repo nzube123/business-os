@@ -1,0 +1,10 @@
+{
+  "title": "First Blog",
+  "Author": {
+    "name": "Confidence Ndubuisi",
+    "imageUrl": "../public/globe.svg"
+  },
+  "imageUrl": "../public/next.svg",
+  "content": "So Hi this is my first blog for this page. actually this is a placeholder data and the actual blog api from contentful will be set and the api will run smoothly and nicely",
+  "Published": true  
+}
