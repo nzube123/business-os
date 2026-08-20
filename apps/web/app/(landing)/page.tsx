@@ -1,13 +1,25 @@
-import { ActivityGrid } from "./_components/ActivityGrid";
-import { HeroSection } from "./_components/HeroSection";
+import AISection from "./_components/sections/ai-section";
+import Capabilities from "./_components/sections/capabilities";
+import Challenges from "./_components/sections/challenges";
+import CTA from "./_components/sections/cta";
+import Footer from "./_components/sections/footer";
+import Hero from "./_components/sections/hero";
+import Navbar from "./_components/sections/navbar";
+import ProductPreview from "./_components/sections/product-preview";
+import Workflow from "./_components/sections/workflow";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(148,163,184,0.15),_transparent_35%),linear-gradient(135deg,_#f8fafc_0%,_#eef2ff_100%)] px-4 pb-10 pt-6 text-slate-900 sm:px-6 lg:px-8">
-      <div className="mx-auto flex max-w-7xl flex-col gap-8">
-        <HeroSection />
-        <ActivityGrid />
-      </div>
-    </div>
+    <main>
+      <Navbar />
+      <Hero />
+      <Workflow />
+      <Challenges />
+      <Capabilities />
+      <ProductPreview />
+      <AISection />
+      <CTA />
+      <Footer />
+    </main>
   );
 }

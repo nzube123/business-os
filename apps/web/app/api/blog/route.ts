@@ -1,5 +1,7 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export default function GET(req: NextRequest, res: NextResponse) {
-    
+export function GET() {
+  return NextResponse.json({
+    message: "Blog API is ready",
+  });
 }
