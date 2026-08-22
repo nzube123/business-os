@@ -17,8 +17,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 24
-          cache: pnpm
+          node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
@@ -26,16 +26,19 @@ jobs:
           version: 9.15.9
           run_install: false
 
-      - name: Install dependencies
+      - name: Verify lockfile
         run: pnpm install --frozen-lockfile
 
-      - name: Lint
-        run: pnpm lint
+      - name: Check formatting and lint
+        run: pnpm check
 
-      - name: Typecheck
-        run: pnpm check-types
+      - name: Run tests
+        run: pnpm test
 
-      - name: Build
+      - name: Run typecheck
+        run: pnpm tsc
+
+      - name: Build web
         run: pnpm build
         env:
           SKIP_ENV_VALIDATION: "1"
