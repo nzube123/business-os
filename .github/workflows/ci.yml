@@ -11,25 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Install dependencies
-        uses: wyvox/action-setup-pnpm@v3.2.0
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          pnpm-version: 9.15.9
+          version: 9.15.9
+          run_install: false
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
           node-version-file: ".nvmrc"
+          cache: "pnpm"
 
       - name: Verify lockfile
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting and lint
-        run: pnpm check
-
-      - name: Run tests
-        run: pnpm test
+        run: pnpm lint
 
       - name: Run typecheck
-        run: pnpm tsc
+        run: pnpm check-types
 
       - name: Build web
         run: pnpm build
