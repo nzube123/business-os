@@ -1,20 +1,12 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import "../globals.css";
-import { Header } from "./_components/layout/header";
+import { ThemeProvider } from "./_components/ThemeProvider";
 
-const geistSans = localFont({
-  src: "../fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-});
-const geistMono = localFont({
-  src: "../fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-});
 
 export const metadata: Metadata = {
-  title: "Business OS",
-  description: "An AI-powered operating system for modern businesses",
+  title: "Business OS — AI Operating System for Businesses",
+  description:
+    "An AI-powered operating system designed to help businesses manage, automate, and understand their operations.",
 };
 
 export default function RootLayout({
@@ -23,10 +15,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full bg-slate-950">
-      <body className={`${geistSans.variable} ${geistMono.variable} min-h-full bg-slate-950 text-slate-100`}>
-        <Header />
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
