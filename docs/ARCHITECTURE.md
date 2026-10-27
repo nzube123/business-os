@@ -161,6 +161,16 @@ sequenceDiagram
 
 PostgreSQL is the system of record. Drizzle ORM is used for schema management and typed queries. Redis supports caching and short-lived state. BullMQ supports asynchronous task processing.
 
+### Authentication Foundation
+
+The web application uses Better Auth with database-backed sessions through the Drizzle PostgreSQL adapter. The Better Auth handler is mounted at `/api/auth/[...all]`, and its server configuration is kept in `apps/web/lib/auth.ts`.
+
+The initial schema contains Better Auth's user, session, account, and verification tables plus a Business OS tenant table. A tenant represents one business workspace. `tenants.owner_user_id` is a unique foreign key to the canonical Better Auth user; this models the MVP's one-owner-user-to-one-tenant relationship without introducing a membership system. Tenant creation and onboarding UI are not part of this foundation.
+
+Configure `DATABASE_URL`, `BETTER_AUTH_SECRET`, and `BETTER_AUTH_URL` in the web app environment. Keep the auth secret server-side. The names and placeholder values are listed in `apps/web/.env.example`.
+
+Drizzle schema changes are generated and applied from `packages/database` using `pnpm --filter @repo/database db:generate` and `pnpm --filter @repo/database db:migrate`.
+
 ### Core Data Domains
 
 - tenants

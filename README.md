@@ -141,7 +141,7 @@ This repository is intended to be documented before implementation begins. The d
 
 ## Implementation Status
 
-This repository currently contains documentation only. No application code, UI components, API endpoints, or database migrations are included.
+The repository includes the Next.js web application, a standalone Pricing page, and the initial Better Auth + Drizzle/PostgreSQL foundation. Full authentication UX, onboarding, protected workspace routes, and business-domain persistence remain future implementation work.
 
 ## Principles for Implementation
 

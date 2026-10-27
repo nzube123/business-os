@@ -18,6 +18,7 @@ This document records the initial architectural decisions for Business OS. These
 | ADR-008 | Use audit events for significant actions | Supports operations visibility, debugging, and trust |
 | ADR-009 | Use BullMQ for asynchronous workflows | Keeps background processes scalable and decoupled |
 | ADR-010 | Use Docker and cloud infrastructure for deployment | Supports consistent packaging and future scalability |
+| ADR-011 | Use Better Auth with database-backed sessions and Drizzle/PostgreSQL | Reuses the approved TypeScript and database stack and keeps authentication state server-persisted |
 
 ## Decision Notes
 
