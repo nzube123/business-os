@@ -55,6 +55,16 @@ erDiagram
 | audit_events | immutable change and workflow history |
 | events | domain event emission table |
 
+## Implemented Authentication Foundation
+
+The initial Drizzle schema in `packages/database/src/schema/index.ts` includes Better Auth's canonical `user`, `session`, `account`, and `verification` tables. Better Auth's `user` table is the only authenticated user identity; do not create a second Business OS user table.
+
+The `tenants` table represents a business workspace and contains a unique, non-null `owner_user_id` foreign key to `user.id`. This enforces at most one tenant per user for the MVP and identifies the owner without a generalized membership or role-assignment table. The eventual first-tenant onboarding operation should create the tenant with the authenticated user as owner in one database transaction.
+
+Sessions and account/provider records reference the Better Auth user and cascade when that user is deleted. Tenant ownership restricts user deletion while a tenant is owned. Drizzle migrations are stored in `packages/database/drizzle`.
+
+The existing business-domain tables below remain proposed schema, not implemented tables. Additional membership, role, business-profile, and billing schemas should be introduced only when their corresponding phases require them.
+
 ## Tenant Model
 
 The tenants table should contain the business identity and default configuration for a business workspace.

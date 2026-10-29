@@ -39,3 +39,6 @@ jobs:
         run: pnpm build
         env:
           SKIP_ENV_VALIDATION: "1"
+          DATABASE_URL: "postgresql://postgres:postgres@localhost:5432/business_os"
+          BETTER_AUTH_SECRET: "ci-only-not-a-real-secret-at-least-32-characters"
+          BETTER_AUTH_URL: "http://localhost:3000"
