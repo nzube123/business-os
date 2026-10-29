@@ -1,3 +1,7 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+
 const footerGroups = [
   {
     title: "Product",
@@ -6,7 +10,7 @@ const footerGroups = [
       { label: "Intelligence", href: "#intelligence" },
       { label: "Operations", href: "#operations" },
       { label: "Automation", href: "#automation" },
-      { label: "Pricing", href: "#pricing" },
+      { label: "Pricing", href: "/pricing" },
     ],
   },
   {
@@ -29,6 +33,10 @@ const footerGroups = [
 ];
 
 export default function Footer() {
+  const isPricingPage = usePathname() === "/pricing";
+  const homeHref = (href: string) =>
+    isPricingPage && href.startsWith("#") ? `/${href}` : href;
+
   return (
     <footer className="bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -36,7 +44,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="max-w-sm">
             <a
-              href="#overview"
+              href={homeHref("#overview")}
               className="inline-flex items-center gap-2"
               aria-label="Business OS home"
             >
@@ -73,7 +81,7 @@ export default function Footer() {
                   {group.links.map((link) => (
                     <li key={link.label}>
                       <a
-                        href={link.href}
+                        href={homeHref(link.href)}
                         className="text-sm text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                       >
                         {link.label}
@@ -94,21 +102,21 @@ export default function Footer() {
 
           <div className="flex items-center gap-5">
             <a
-              href="#privacy"
+              href={homeHref("#privacy")}
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               Privacy
             </a>
 
             <a
-              href="#terms"
+              href={homeHref("#terms")}
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               Terms
             </a>
 
             <a
-              href="#security"
+              href={homeHref("#security")}
               className="text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               Security

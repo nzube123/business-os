@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 import ThemeToggle from "../ThemeToggle";
 
@@ -12,11 +13,13 @@ const navigation = [
   { label: "Automation", href: "#automation" },
   { label: "Insights", href: "#insights" },
   { label: "Integrations", href: "#integrations" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Pricing", href: "/pricing" },
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const pathname = usePathname();
+  const isPricingPage = pathname === "/pricing";
 
   function closeMobileMenu() {
     setMobileOpen(false);
@@ -40,7 +43,7 @@ export default function Navbar() {
         <div className="flex min-h-16 items-center justify-between gap-6 px-4 sm:px-5">
           {/* Brand */}
           <a
-            href="#overview"
+            href={isPricingPage ? "/" : "#overview"}
             aria-label="Business OS home"
             className="
               group
@@ -81,7 +84,13 @@ export default function Navbar() {
             {navigation.map((item) => (
               <a
                 key={item.href}
-                href={item.href}
+                href={
+                  item.href === "/pricing"
+                    ? item.href
+                    : isPricingPage
+                      ? `/${item.href}`
+                      : item.href
+                }
                 className="
                   rounded-lg px-3 py-2
                   text-[13px] font-medium
@@ -190,7 +199,13 @@ export default function Navbar() {
               {navigation.map((item) => (
                 <a
                   key={item.href}
-                  href={item.href}
+                  href={
+                    item.href === "/pricing"
+                      ? item.href
+                      : isPricingPage
+                        ? `/${item.href}`
+                        : item.href
+                  }
                   onClick={closeMobileMenu}
                   className="
                     rounded-lg px-3 py-2.5
